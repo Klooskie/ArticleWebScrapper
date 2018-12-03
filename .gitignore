@@ -1,8 +1,4 @@
 .gradle/
 /build/
 /bin/
-gradle/
-gradlew
-gradlew.bat
 .idea
-settings.gradle
