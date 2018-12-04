@@ -17,9 +17,8 @@ public class Main {
 
         DataBase db = new DataBase();
 
-        Crawler crawler =  new Crawler(domain, db, 2);
+        Crawler crawler =  new Crawler(domain, db, 1);
 
         crawler.crawl();
-
     }
 }
