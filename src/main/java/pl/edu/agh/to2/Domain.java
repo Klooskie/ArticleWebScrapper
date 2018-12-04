@@ -1,9 +1,13 @@
 package pl.edu.agh.to2;
 
 public class Domain {
-    String domainUrl;
+    String url;
 
-    public String getDomainUrl() {
-        return domainUrl;
+    public Domain(String url) {
+        this.url = url;
+    }
+
+    public String getUrl() {
+        return url;
     }
 }
