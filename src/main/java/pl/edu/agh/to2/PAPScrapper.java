@@ -12,11 +12,11 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class PAPScrapper extends Scrapper {
-    private final String domain = "https://www.pap.pl";
+
+    private final Domain domain = new Domain("https://www.pap.pl");
 
     public PAPScrapper(){}
 
-    //kapala
     public List<String> getUrls(String html){
         //Regex pattern for relative links
         String pattern = "^\\/[a-zA-Z].*";
@@ -33,7 +33,7 @@ public class PAPScrapper extends Scrapper {
             Matcher m = r.matcher(href);
             if(m.find()){
                 StringBuilder url = new StringBuilder();
-                url.append(domain);
+                url.append(domain.getUrl());
                 url.append(href);
                 urls.add(url.toString());
             }
@@ -42,8 +42,6 @@ public class PAPScrapper extends Scrapper {
         return urls;
     }
 
-
-    //konieczny
     public boolean checkIfArticle(String html) {
         Document doc = Jsoup.parse(html);
         Elements articles = doc.select("article");
