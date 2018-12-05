@@ -14,6 +14,12 @@ public class DataBase {
 
     @Override
     public String toString() {
+        StringBuilder articles = new StringBuilder();
+        for(Article article: this.articles){
+            articles.append(article);
+            articles.append("\n");
+        }
+
         return articles.toString();
     }
 
@@ -28,9 +34,10 @@ public class DataBase {
         return false;
     }
 
-
-    //TODO
     private boolean isUnique(Article article){
+        if(articles.contains(article))
+            return false;
+
         return true;
     }
 

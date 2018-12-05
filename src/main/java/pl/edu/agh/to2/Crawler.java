@@ -36,7 +36,6 @@ public class Crawler {
 
         if (scrapper.checkIfArticle(html)) {
             Article article = scrapper.readArticle(html);
-
             db.save(article);
         }
 

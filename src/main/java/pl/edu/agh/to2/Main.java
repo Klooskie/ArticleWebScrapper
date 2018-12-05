@@ -11,14 +11,16 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Domain domain = new Domain(args[0]);
+        Domain domain = new Domain("https://www.pap.pl");
 
         System.out.println(domain.getUrl());
 
         DataBase db = new DataBase();
 
-        Crawler crawler =  new Crawler(domain, db, 1);
+        Crawler crawler =  new Crawler(domain, db, 2);
 
         crawler.crawl();
+
+        System.out.println(db);
     }
 }

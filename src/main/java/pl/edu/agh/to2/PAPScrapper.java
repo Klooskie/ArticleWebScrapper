@@ -6,6 +6,9 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -15,27 +18,29 @@ public class PAPScrapper extends Scrapper {
 
     private final Domain domain = new Domain("https://www.pap.pl");
 
-    public PAPScrapper(){}
+    public PAPScrapper() {
+    }
 
-    public List<String> getUrls(String html){
-        //Regex pattern for relative links
-        String pattern = "^\\/[a-zA-Z].*";
-        Pattern r = Pattern.compile(pattern);
+    public List<String> getUrls(String html) {
 
-        // Get DOM of the website
         Document doc = Jsoup.parse(html);
         Elements links = doc.getElementsByTag("a");
+
+        String pattern = "^\\/[a-zA-Z].*";
+        Pattern r = Pattern.compile(pattern);
 
         // Extract appropriate urls
         List<String> urls = new LinkedList<>();
         for (Element link : links) {
             String href = link.attr("href");
             Matcher m = r.matcher(href);
-            if(m.find()){
+            if (m.find()) {
                 StringBuilder url = new StringBuilder();
                 url.append(domain.getUrl());
                 url.append(href);
-                urls.add(url.toString());
+
+                if (!urls.contains(url.toString()))
+                    urls.add(url.toString());
             }
         }
 
@@ -44,31 +49,54 @@ public class PAPScrapper extends Scrapper {
 
     public boolean checkIfArticle(String html) {
         Document doc = Jsoup.parse(html);
-        Elements articles = doc.select("article");
+        String title = doc.select("h1[class='title']").text();
+        String rawDate = doc.select("div[class='moreInfo']").text();
+        String text = doc.select("div[property='schema:text']").text();
 
-        if (articles.isEmpty())
+        if (title.isEmpty() || rawDate.isEmpty() || text.isEmpty())
             return false;
-        else
-            return true;
 
+        return true;
     }
 
-
-    //wuju
     public Article readArticle(String html) {
         Document doc = Jsoup.parse(html);
+        String title = doc.select("h1[class='title']").text();
 
-        Elements elements = doc.select("h1.title");
+        String rawDate = doc.select("div[class='moreInfo']").text();
+        String mainPattern = "([0-9\\-(, ):]*)(aktualizacja: .*)*";
+        Pattern p = Pattern.compile(mainPattern);
+        Matcher m = p.matcher(rawDate);
+        if (m.find()) {
+            rawDate = m.group(1);
+        }
 
-        Element insideSpan = elements.first();
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd, hh:mm");
+        Date date = null;
+        try {
+            date = formatter.parse(rawDate);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
 
-        String title = insideSpan.text();
+        String text = doc.select("div[property='schema:text']").text();
+        mainPattern = "(.*)(autor: ([a-z\\-A-Z ]*))( [a-z]*\\/)*$";
+        p = Pattern.compile(mainPattern);
+        m = p.matcher(text);
 
-        System.out.println(title);
+        String author = null;
+        String content = null;
+        if (m.find()) {
+            author = m.group(3);
+            content = m.group(1);
+        }
 
+        if(content == null){
+            content = text;
+        }
 
-//        System.out.println(element.toString());
+        Article article = new Article(title, date, content, author);
 
-        return null;
+        return article;
     }
 }
