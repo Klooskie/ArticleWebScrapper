@@ -5,26 +5,41 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class PAPScrapper extends Scrapper {
+    private final String domain = "https://www.pap.pl";
 
-    public PAPScrapper(){
-
-    }
+    public PAPScrapper(){}
 
     //kapala
     public List<String> getUrls(String html){
-        Document doc = Jsoup.parse(html);
-        Elements URLs = doc.select("a");
+        //Regex pattern for relative links
+        String pattern = "^\\/[a-zA-Z].*";
+        Pattern r = Pattern.compile(pattern);
 
-        List<String> parsedURLs = new LinkedList<>();
-        for(Element URL: URLs){
-            parsedURLs.add(URL.attr("href"));
+        // Get DOM of the website
+        Document doc = Jsoup.parse(html);
+        Elements links = doc.getElementsByTag("a");
+
+        // Extract appropriate urls
+        List<String> urls = new LinkedList<>();
+        for (Element link : links) {
+            String href = link.attr("href");
+            Matcher m = r.matcher(href);
+            if(m.find()){
+                StringBuilder url = new StringBuilder();
+                url.append(domain);
+                url.append(href);
+                urls.add(url.toString());
+            }
         }
 
-        return parsedURLs;
+        return urls;
     }
 
 
