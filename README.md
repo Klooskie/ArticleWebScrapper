@@ -2,7 +2,7 @@
 ---
 
 ### Introduction
-Article Spider Bot is a program that you can use to automatically download articles from various informational websites.
+Article Spider Bot is an application that you can use to automatically download articles from various informational websites.
 
 ### Technologies
 * JavaRX - efficient processing
@@ -11,4 +11,4 @@ Article Spider Bot is a program that you can use to automatically download artic
 * JSoup - web pages processing
 
 ### Setup
-TODO
+For now the application can be launch as a commandline program.
