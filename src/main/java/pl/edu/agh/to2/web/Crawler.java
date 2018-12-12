@@ -1,4 +1,4 @@
-package pl.edu.agh.to2;
+package pl.edu.agh.to2.web;
 
 import pl.edu.agh.to2.persistence.Article;
 import pl.edu.agh.to2.persistence.DataBase;

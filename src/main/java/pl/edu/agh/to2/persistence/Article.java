@@ -1,4 +1,4 @@
-package pl.edu.agh.to2;
+package pl.edu.agh.to2.persistence;
 
 import java.util.Date;
 import java.util.List;

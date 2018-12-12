@@ -1,4 +1,4 @@
-package pl.edu.agh.to2;
+package pl.edu.agh.to2.web;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;

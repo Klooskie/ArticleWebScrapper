@@ -1,11 +1,8 @@
 package pl.edu.agh.to2;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
+import pl.edu.agh.to2.persistence.DataBase;
+import pl.edu.agh.to2.persistence.Domain;
+import pl.edu.agh.to2.web.Crawler;
 
 public class Main {
 
