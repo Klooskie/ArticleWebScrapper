@@ -1,5 +1,7 @@
 package pl.edu.agh.to2;
 
+import pl.edu.agh.to2.persistence.Article;
+
 import java.util.List;
 
 public abstract class Scrapper {

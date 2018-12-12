@@ -1,5 +1,9 @@
 package pl.edu.agh.to2;
 
+import pl.edu.agh.to2.persistence.Article;
+import pl.edu.agh.to2.persistence.DataBase;
+import pl.edu.agh.to2.persistence.Domain;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
