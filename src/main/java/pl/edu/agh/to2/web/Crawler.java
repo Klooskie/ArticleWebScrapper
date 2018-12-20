@@ -39,7 +39,7 @@ public class Crawler {
         List<String> urls = scrapper.getUrls(html);
 
         if (scrapper.checkIfArticle(html)) {
-            Article article = scrapper.readArticle(html);
+            Article article = scrapper.readArticle(html, url);
             db.save(article);
         }
 

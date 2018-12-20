@@ -60,7 +60,7 @@ public class PAPScrapper extends Scrapper {
         return true;
     }
 
-    public Article readArticle(String html) {
+    public Article readArticle(String html, String url) {
         Document doc = Jsoup.parse(html);
         String title = doc.select("h1[class='title']").text();
 
@@ -96,7 +96,7 @@ public class PAPScrapper extends Scrapper {
             content = text;
         }
 
-        Article article = new Article(title, date, content, author);
+        Article article = new Article(title, date, content, author, null, url, null);
 
         return article;
     }

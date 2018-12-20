@@ -10,5 +10,5 @@ public abstract class Scrapper {
 
     public abstract boolean checkIfArticle(String html);
 
-    public abstract Article readArticle(String html);
+    public abstract Article readArticle(String html, String url);
 }
