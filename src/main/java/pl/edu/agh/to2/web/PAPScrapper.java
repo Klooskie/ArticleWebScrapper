@@ -1,11 +1,12 @@
-package pl.edu.agh.to2;
+package pl.edu.agh.to2.web;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import pl.edu.agh.to2.persistence.Article;
+import pl.edu.agh.to2.persistence.Domain;
 
-import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -59,7 +60,7 @@ public class PAPScrapper extends Scrapper {
         return true;
     }
 
-    public Article readArticle(String html) {
+    public Article readArticle(String html, String url) {
         Document doc = Jsoup.parse(html);
         String title = doc.select("h1[class='title']").text();
 
@@ -95,7 +96,7 @@ public class PAPScrapper extends Scrapper {
             content = text;
         }
 
-        Article article = new Article(title, date, content, author);
+        Article article = new Article(title, date, content, author, null, url, null);
 
         return article;
     }

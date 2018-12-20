@@ -1,4 +1,8 @@
-package pl.edu.agh.to2;
+package pl.edu.agh.to2.web;
+
+import pl.edu.agh.to2.persistence.Article;
+import pl.edu.agh.to2.persistence.DataBase;
+import pl.edu.agh.to2.persistence.Domain;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -35,7 +39,7 @@ public class Crawler {
         List<String> urls = scrapper.getUrls(html);
 
         if (scrapper.checkIfArticle(html)) {
-            Article article = scrapper.readArticle(html);
+            Article article = scrapper.readArticle(html, url);
             db.save(article);
         }
 
