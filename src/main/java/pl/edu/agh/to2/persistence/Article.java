@@ -29,8 +29,8 @@ public class Article {
 
     @Column(name = "URL")
     private String url;
-    
-    private List<String> tags;
+
+//    private List<String> tags;
 
     public Article(){}
 
@@ -41,7 +41,7 @@ public class Article {
         this.author = author;
         this.source = source;
         this.url = url;
-        this.tags = tags;
+//        this.tags = tags;
     }
 
     public String getTitle() {
@@ -68,9 +68,9 @@ public class Article {
         return url;
     }
 
-    public List<String> getTags() {
-        return tags;
-    }
+//    public List<String> getTags() {
+//        return tags;
+//    }
 
     public void setTitle(String title) {
         this.title = title;
@@ -96,9 +96,9 @@ public class Article {
         this.url = url;
     }
 
-    public void setTags(List<String> tags) {
-        this.tags = tags;
-    }
+//    public void setTags(List<String> tags) {
+//        this.tags = tags;
+//    }
 
     @Override
     public String toString() {
