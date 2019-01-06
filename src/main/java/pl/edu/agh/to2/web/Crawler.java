@@ -40,7 +40,7 @@ public class Crawler {
 
         if (scrapper.checkIfArticle(html)) {
             Article article = scrapper.readArticle(html, url);
-            db.save(article);
+//            db.save(article);
         }
 
         for (String newUrl : urls) {

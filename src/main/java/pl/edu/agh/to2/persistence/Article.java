@@ -30,6 +30,10 @@ public class Article {
     @Column(name = "URL")
     private String url;
 
+    @ManyToOne
+    @JoinColumn(name = "DOMAIN_FK")
+    private Domain domain;
+
 //    private List<String> tags;
 
     public Article(){}
@@ -43,6 +47,10 @@ public class Article {
         this.url = url;
 //        this.tags = tags;
     }
+
+    public int getID() { return ID; }
+
+    public void setID(int ID) { this.ID = ID; }
 
     public String getTitle() {
         return title;
@@ -99,6 +107,14 @@ public class Article {
 //    public void setTags(List<String> tags) {
 //        this.tags = tags;
 //    }
+
+    public Domain getDomain() {
+        return domain;
+    }
+
+    public void setDomain(Domain domain) {
+        this.domain = domain;
+    }
 
     @Override
     public String toString() {

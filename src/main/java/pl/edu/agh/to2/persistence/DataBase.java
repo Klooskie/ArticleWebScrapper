@@ -1,45 +1,50 @@
 package pl.edu.agh.to2.persistence;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityTransaction;
+import javax.persistence.Persistence;
 import java.util.LinkedList;
 import java.util.List;
 
-//TODO
 public class DataBase {
+    private static EntityManagerFactory factory;
+    private static EntityManager entityManager;
 
-    List<Article> articles = new LinkedList<>();
-
-    public DataBase() {
-
+    static{
+        factory = Persistence.createEntityManagerFactory("default");
+        entityManager = factory.createEntityManager();
     }
 
-    @Override
-    public String toString() {
-        StringBuilder articles = new StringBuilder();
-        for(Article article: this.articles){
-            articles.append(article);
-            articles.append("\n");
+//    public DataBase() { }
+
+    public static void close(){
+        entityManager.close();
+        factory.close();
+    }
+
+    public static boolean save(Domain domain){
+        try {
+            EntityTransaction txn = entityManager.getTransaction();
+            txn.begin();
+            entityManager.persist(domain);
+            txn.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-
-        return articles.toString();
-    }
-
-
-    //TODO
-    public boolean save(Article article) {
-        if (isUnique(article)) {
-            articles.add(article);
-            return true;
-        }
-
-        return false;
-    }
-
-    private boolean isUnique(Article article){
-        if(articles.contains(article))
-            return false;
-
         return true;
     }
 
-
+    public static boolean save(Article article, Domain domain) {
+        try {
+            EntityTransaction txn = entityManager.getTransaction();
+            txn.begin();
+            entityManager.persist(article);
+            domain.addArticle(article);
+            txn.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return true;
+    }
 }
