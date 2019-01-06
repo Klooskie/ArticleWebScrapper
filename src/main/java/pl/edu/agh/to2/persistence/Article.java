@@ -1,17 +1,38 @@
 package pl.edu.agh.to2.persistence;
 
+import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 
+@Entity
+@Table(name = Article.TABLE_NAME)
 public class Article {
-    String title;
-    Date date;
-    String content;
-    String author;
-    String source;
-    String url;
-    List<String> tags;
+    public static final String TABLE_NAME = "ARTICLES_TABLE";
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int ID;
 
+    @Column(name = "TITLE")
+    private String title;
+
+    @Column(name = "DATE")
+    private Date date;
+
+    @Column(name = "CONTENT")
+    private String content;
+
+    @Column(name = "AUTHOR")
+    private String author;
+
+    @Column(name = "SOURCE")
+    private String source;
+
+    @Column(name = "URL")
+    private String url;
+    
+    private List<String> tags;
+
+    public Article(){}
 
     public Article(String title, Date date, String content, String author, String source, String url, List<String> tags) {
         this.title = title;
