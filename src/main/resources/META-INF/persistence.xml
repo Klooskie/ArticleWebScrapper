@@ -3,7 +3,7 @@
     <persistence-unit name="default" transaction-type="RESOURCE_LOCAL">
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 
-        <class>pl.edu.agh.to2.Article</class>
+        <class>pl.edu.agh.to2.persistence.Article</class>
 
         <properties>
             <property name="javax.persistence.jdbc.driver" value="org.sqlite.JDBC" />
