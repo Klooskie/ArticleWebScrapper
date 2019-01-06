@@ -16,7 +16,7 @@ public class DataBase {
         entityManager = factory.createEntityManager();
     }
 
-//    public DataBase() { }
+    private DataBase() { }
 
     public static void close(){
         entityManager.close();

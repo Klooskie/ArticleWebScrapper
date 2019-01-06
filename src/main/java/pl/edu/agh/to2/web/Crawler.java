@@ -4,6 +4,7 @@ import pl.edu.agh.to2.persistence.Article;
 import pl.edu.agh.to2.persistence.DataBase;
 import pl.edu.agh.to2.persistence.Domain;
 
+import javax.xml.crypto.Data;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -13,13 +14,11 @@ import java.net.URL;
 import java.util.List;
 
 public class Crawler {
-    Scrapper scrapper;
-    DataBase db;
-    Domain domain;
-    int maxDepth;
+    private Scrapper scrapper;
+    private Domain domain;
+    private int maxDepth;
 
-    public Crawler(Domain domain, DataBase db, int maxDepth) {
-        this.db = db;
+    public Crawler(Domain domain, int maxDepth) {
         this.domain = domain;
         this.maxDepth = maxDepth;
         this.scrapper = makeScrapper(domain);
@@ -40,7 +39,7 @@ public class Crawler {
 
         if (scrapper.checkIfArticle(html)) {
             Article article = scrapper.readArticle(html, url);
-//            db.save(article);
+            DataBase.save(article, domain);
         }
 
         for (String newUrl : urls) {
