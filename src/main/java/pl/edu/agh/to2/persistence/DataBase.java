@@ -41,5 +41,7 @@ public class DataBase {
         return true;
     }
 
-
+    public List<Article> getArticles() {
+        return articles;
+    }
 }
