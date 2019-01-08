@@ -4,6 +4,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
+import java.util.ArrayList;
 import java.util.List;
 
 public class DataBase {
@@ -49,6 +50,6 @@ public class DataBase {
 
     //TODO
     public static List<Article> getArticles(Domain domain) {
-        return null;
+        return new ArrayList<>();
     }
 }

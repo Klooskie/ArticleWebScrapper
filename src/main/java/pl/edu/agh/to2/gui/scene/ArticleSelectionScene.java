@@ -9,12 +9,10 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import pl.edu.agh.to2.gui.wrappers.ArticleWrapper;
-import pl.edu.agh.to2.persistence.Article;
 import pl.edu.agh.to2.persistence.DataBase;
 import pl.edu.agh.to2.persistence.Domain;
 import pl.edu.agh.to2.web.Crawler;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -38,10 +36,8 @@ public class ArticleSelectionScene extends JFXScene {
 
         if (domain.getUrl().equals("https://www.pap.pl")) {
             // wrzucenie do listy artykulow z bazy
-            System.out.println("pap1");
-            System.out.println(domain.getUrl());
 
-
+            System.out.println("Pobieram z bazy");
             List<ArticleWrapper> articleWrappers = ArticleWrapper.wrapArticles(DataBase.getArticles(domain));
 
             listOfArticles.addAll(articleWrappers);
@@ -62,11 +58,15 @@ public class ArticleSelectionScene extends JFXScene {
                 System.out.println("Refreshing");
                 System.out.println(domain.getUrl());
 
+                //TODO
+                DataBase.save(domain);
+                System.out.println("Pobieram z neta");
                 Crawler crawler =  new Crawler(domain, 2);
                 crawler.crawl();
 
                 listOfArticles.clear();
 
+                System.out.println("Pobietam z bazy");
                 List<ArticleWrapper> articleWrappers = ArticleWrapper.wrapArticles(DataBase.getArticles(domain));
 
                 listOfArticles.addAll(articleWrappers);

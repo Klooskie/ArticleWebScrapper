@@ -10,13 +10,11 @@ import pl.edu.agh.to2.persistence.Domain;
 public class Main extends Application {
 
     public static void main(String[] args) {
-
         DataBase.save(new Domain("https://www.pap.pl"));
         //TODO reszta domen
 
         launch(args);
 
-        System.out.println("Koniec");
         DataBase.close();
     }
 
