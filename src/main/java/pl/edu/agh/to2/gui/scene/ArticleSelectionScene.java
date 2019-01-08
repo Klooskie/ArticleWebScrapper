@@ -1,5 +1,6 @@
 package pl.edu.agh.to2.gui.scene;
 
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Pos;
@@ -53,7 +54,7 @@ public class ArticleSelectionScene extends JFXScene {
             System.out.println("pap3");
     }
 
-    private void refreshListOfArticles() {
+    private void refreshListOfArticles(Button refreshButton) {
         new Thread(() -> {
                 System.out.println("Refreshing");
                 System.out.println(domain.getUrl());
@@ -66,10 +67,18 @@ public class ArticleSelectionScene extends JFXScene {
 
                 listOfArticles.clear();
 
-                System.out.println("Pobietam z bazy");
+                System.out.println("Pobieram z bazy");
                 List<ArticleWrapper> articleWrappers = ArticleWrapper.wrapArticles(DataBase.getArticles(domain));
 
                 listOfArticles.addAll(articleWrappers);
+
+                // refresh buttons text
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        refreshButton.setText("Odświeżono, kliknij aby ponowić");
+                    }
+                });
 
                 System.out.println("Refreshing is over");
         }).start();
@@ -77,7 +86,7 @@ public class ArticleSelectionScene extends JFXScene {
 
     void generateScene() {
 
-        Label sceneTitle = new Label("Lista artukulow z portalu " + domain);
+        Label sceneTitle = new Label("Lista artukułów z portalu " + domain.getUrl());
 
         TableView table = new TableView();
 
@@ -94,7 +103,7 @@ public class ArticleSelectionScene extends JFXScene {
             return row;
         });
 
-        TableColumn titleColumn = new TableColumn("Tytul");
+        TableColumn titleColumn = new TableColumn("Tytuł");
         titleColumn.setCellValueFactory(
                 new PropertyValueFactory<ArticleWrapper, String>("title")
         );
@@ -107,13 +116,13 @@ public class ArticleSelectionScene extends JFXScene {
         table.setItems(listOfArticles);
         table.getColumns().addAll(titleColumn, dateColumn);
 
-        Button backButton = new Button("Wroc do wyboru domeny");
+        Button backButton = new Button("Wróć do wyboru domeny");
         backButton.setOnAction(e -> stage.setScene(domainSelectionScene.getScene()));
 
-        Button refreshButton = new Button("Odswiez liste artykulow");
+        Button refreshButton = new Button("Odśwież listę artykułów");
         refreshButton.setOnAction(e -> {
-            refreshButton.setText("Odswiezanie...");
-            refreshListOfArticles();
+            refreshButton.setText("Odświeżanie...");
+            refreshListOfArticles(refreshButton);
         });
 
         VBox articleSelectionLayout = new VBox();
