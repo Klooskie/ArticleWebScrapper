@@ -26,10 +26,10 @@ public class ArticleScene extends JFXScene {
     }
 
     void generateScene() {
-        Button backToDomainSelectionButton = new Button("Wroc do wyboru domeny");
+        Button backToDomainSelectionButton = new Button("Wróć do wyboru domeny");
         backToDomainSelectionButton.setOnAction(e -> stage.setScene(domainSelectionScene.getScene()));
 
-        Button backButton = new Button("Wroc do wyboru artykulu");
+        Button backButton = new Button("Wróć do wyboru artykułu");
         backButton.setOnAction(e -> stage.setScene(articleSelectionScene.getScene()));
 
         Label articleTitle = new Label(article.getTitle());
