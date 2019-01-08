@@ -4,7 +4,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
-import java.util.LinkedList;
 import java.util.List;
 
 public class DataBase {
@@ -46,5 +45,10 @@ public class DataBase {
             e.printStackTrace();
         }
         return true;
+    }
+
+    //TODO
+    public static List<Article> getArticles(Domain domain) {
+        return null;
     }
 }

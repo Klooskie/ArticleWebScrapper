@@ -96,7 +96,8 @@ public class PAPScrapper extends Scrapper {
             content = text;
         }
 
-        Article article = new Article(title, date, content, author, null, url, null);
+        //TODO
+        Article article = new Article(title, date, content, author, null, url);
 
         return article;
     }
