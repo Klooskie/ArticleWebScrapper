@@ -16,6 +16,8 @@ public class Main extends Application {
         launch(args);
 
         DataBase.close();
+
+        System.exit(0);
     }
 
     @Override
