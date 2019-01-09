@@ -121,8 +121,10 @@ public class ArticleSelectionScene extends JFXScene {
 
         Button refreshButton = new Button("Odśwież listę artykułów");
         refreshButton.setOnAction(e -> {
-            refreshButton.setText("Odświeżanie...");
-            refreshListOfArticles(refreshButton);
+            if(!refreshButton.getText().equals("Odświeżanie...")) {
+                refreshButton.setText("Odświeżanie...");
+                refreshListOfArticles(refreshButton);
+            }
         });
 
         VBox articleSelectionLayout = new VBox();
