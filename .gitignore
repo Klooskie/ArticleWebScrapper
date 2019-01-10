@@ -3,4 +3,4 @@
 /bin/
 .idea
 /out/
-/db/database.sqlite
+.database.sqlite

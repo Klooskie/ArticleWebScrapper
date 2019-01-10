@@ -8,7 +8,7 @@
 
         <properties>
             <property name="javax.persistence.jdbc.driver" value="org.sqlite.JDBC" />
-            <property name="javax.persistence.jdbc.url" value="jdbc:sqlite:./db/database.sqlite" />
+            <property name="javax.persistence.jdbc.url" value="jdbc:sqlite:./database.sqlite" />
             <property name="hibernate.dialect" value="SQLiteDialect"/>
             <property name="hibernate.connection.charSet" value="UTF-8"/>
             <property name="hibernate.hbm2ddl.auto" value="create"/>
