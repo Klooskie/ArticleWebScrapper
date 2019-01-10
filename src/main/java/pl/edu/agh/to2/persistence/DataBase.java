@@ -1,9 +1,6 @@
 package pl.edu.agh.to2.persistence;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
-import javax.persistence.Persistence;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -50,6 +47,14 @@ public class DataBase {
 
     //TODO
     public static List<Article> getArticles(Domain domain) {
-        return new ArrayList<>();
+        EntityTransaction txn = entityManager.getTransaction();
+        txn.begin();
+        String SQLquery = "SELECT a FROM Article a JOIN a.domain d WHERE d.url like :d_url";
+        Query query = entityManager.createQuery(SQLquery, Article.class).setParameter("d_url", domain.getUrl());
+//        String SQLquery = "SELECT a FROM Article a ";
+//        Query query = entityManager.createQuery(SQLquery, Article.class);
+        List list = query.getResultList();
+        txn.commit();
+        return list;
     }
 }
