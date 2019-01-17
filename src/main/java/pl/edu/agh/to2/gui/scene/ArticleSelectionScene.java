@@ -43,8 +43,6 @@ public class ArticleSelectionScene extends JFXScene {
 
             listOfArticles.addAll(articleWrappers);
 
-            //odswiezenie w nowym watku TODO
-//            refreshListOfArticles();
         }
 
         if (domain.getUrl().equals("PAP2"))
@@ -59,7 +57,6 @@ public class ArticleSelectionScene extends JFXScene {
                 System.out.println("Refreshing");
                 System.out.println(domain.getUrl());
 
-                //TODO
                 DataBase.save(domain);
                 System.out.println("Pobieram z neta");
                 Crawler crawler =  new Crawler(domain, 2);

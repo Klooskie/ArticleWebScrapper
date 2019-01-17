@@ -45,7 +45,7 @@ public class DataBase {
         return true;
     }
 
-    //TODO
+
     public static List<Article> getArticles(Domain domain) {
         EntityTransaction txn = entityManager.getTransaction();
         txn.begin();

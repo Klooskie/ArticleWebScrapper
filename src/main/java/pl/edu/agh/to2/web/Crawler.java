@@ -43,6 +43,8 @@ public class Crawler {
         }
 
         for (String newUrl : urls) {
+            if(newUrl.equals("https://www.pap.pl/list-of-articles/"))
+                continue;
             crawl(newUrl, depth + 1);
         }
 
