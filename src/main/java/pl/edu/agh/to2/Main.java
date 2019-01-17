@@ -1,23 +1,31 @@
 package pl.edu.agh.to2;
 
+import javafx.application.Application;
+import javafx.stage.Stage;
+import pl.edu.agh.to2.gui.scene.DomainSelectionScene;
 import pl.edu.agh.to2.persistence.DataBase;
 import pl.edu.agh.to2.persistence.Domain;
-import pl.edu.agh.to2.web.Crawler;
 
-public class Main {
+
+public class Main extends Application {
 
     public static void main(String[] args) {
+        DataBase.save(new Domain("https://www.pap.pl"));
+        //TODO reszta domen
 
-        Domain domain = new Domain("https://www.pap.pl");
+        launch(args);
 
-        System.out.println(domain.getUrl());
+        DataBase.close();
 
-        DataBase db = new DataBase();
+        System.exit(0);
+    }
 
-        Crawler crawler =  new Crawler(domain, db, 2);
-
-        crawler.crawl();
-
-        System.out.println(db);
+    @Override
+    public void start(Stage primaryStage) {
+        primaryStage.setTitle("WebScrapper");
+        DomainSelectionScene domainSelectionScene = new DomainSelectionScene(primaryStage);
+        primaryStage.setScene(domainSelectionScene.getScene());
+        primaryStage.setResizable(false);
+        primaryStage.show();
     }
 }

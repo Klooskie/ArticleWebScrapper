@@ -1,45 +1,60 @@
 package pl.edu.agh.to2.persistence;
 
-import java.util.LinkedList;
+import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
-//TODO
 public class DataBase {
+    private static EntityManagerFactory factory;
+    private static EntityManager entityManager;
 
-    List<Article> articles = new LinkedList<>();
-
-    public DataBase() {
-
+    static{
+        factory = Persistence.createEntityManagerFactory("default");
+        entityManager = factory.createEntityManager();
     }
 
-    @Override
-    public String toString() {
-        StringBuilder articles = new StringBuilder();
-        for(Article article: this.articles){
-            articles.append(article);
-            articles.append("\n");
+    private DataBase() { }
+
+    public static void close(){
+        entityManager.close();
+        factory.close();
+    }
+
+    public static boolean save(Domain domain){
+        try {
+            EntityTransaction txn = entityManager.getTransaction();
+            txn.begin();
+            entityManager.persist(domain);
+            txn.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-
-        return articles.toString();
+        return true;
     }
 
-
-    //TODO
-    public boolean save(Article article) {
-        if (isUnique(article)) {
-            articles.add(article);
-            return true;
+    public static boolean save(Article article, Domain domain) {
+        try {
+            EntityTransaction txn = entityManager.getTransaction();
+            txn.begin();
+            entityManager.persist(article);
+            domain.addArticle(article);
+            txn.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-
-        return false;
-    }
-
-    private boolean isUnique(Article article){
-        if(articles.contains(article))
-            return false;
-
         return true;
     }
 
 
+    public static List<Article> getArticles(Domain domain) {
+        EntityTransaction txn = entityManager.getTransaction();
+        txn.begin();
+        String SQLquery = "SELECT a FROM Article a JOIN a.domain d WHERE d.url like :d_url";
+        Query query = entityManager.createQuery(SQLquery, Article.class).setParameter("d_url", domain.getUrl());
+//        String SQLquery = "SELECT a FROM Article a ";
+//        Query query = entityManager.createQuery(SQLquery, Article.class);
+        List list = query.getResultList();
+        txn.commit();
+        return list;
+    }
 }
