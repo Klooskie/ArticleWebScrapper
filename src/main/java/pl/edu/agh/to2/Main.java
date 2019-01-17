@@ -2,7 +2,8 @@ package pl.edu.agh.to2;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
-import pl.edu.agh.to2.gui.scene.DomainSelectionScene;
+import pl.edu.agh.to2.gui.controller.DomainSelectionController;
+import pl.edu.agh.to2.gui.view.DomainSelectionView;
 import pl.edu.agh.to2.persistence.DataBase;
 import pl.edu.agh.to2.persistence.Domain;
 
@@ -23,8 +24,12 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) {
         primaryStage.setTitle("WebScrapper");
-        DomainSelectionScene domainSelectionScene = new DomainSelectionScene(primaryStage);
-        primaryStage.setScene(domainSelectionScene.getScene());
+
+        DomainSelectionController domainSelectionController = new DomainSelectionController(primaryStage);
+        DomainSelectionView domainSelectionView = new DomainSelectionView(domainSelectionController);
+        domainSelectionController.setView(domainSelectionView);
+
+        primaryStage.setScene(domainSelectionView.getScene());
         primaryStage.setResizable(false);
         primaryStage.show();
     }

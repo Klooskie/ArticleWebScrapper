@@ -1,9 +1,8 @@
-package pl.edu.agh.to2.gui.wrappers;
+package pl.edu.agh.to2.gui.model;
 
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import pl.edu.agh.to2.persistence.Article;
-import pl.edu.agh.to2.persistence.DataBase;
 
 import java.util.ArrayList;
 import java.util.Date;

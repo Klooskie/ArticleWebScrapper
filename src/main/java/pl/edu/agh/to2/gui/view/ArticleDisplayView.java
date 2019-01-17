@@ -1,4 +1,4 @@
-package pl.edu.agh.to2.gui.scene;
+package pl.edu.agh.to2.gui.view;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -9,41 +9,40 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import pl.edu.agh.to2.gui.wrappers.ArticleWrapper;
+import pl.edu.agh.to2.gui.controller.ArticleDisplayController;
+import pl.edu.agh.to2.gui.controller.Controller;
+import pl.edu.agh.to2.gui.model.ArticleWrapper;
 
-public class ArticleScene extends JFXScene {
+public class ArticleDisplayView extends JFXView {
 
-    private DomainSelectionScene domainSelectionScene;
-    private ArticleSelectionScene articleSelectionScene;
-    private ArticleWrapper article;
-
-    public ArticleScene(Stage stage, DomainSelectionScene domainSelectionScene, ArticleSelectionScene articleSelectionScene, ArticleWrapper article) {
-        super(stage);
-        this.domainSelectionScene = domainSelectionScene;
-        this.articleSelectionScene = articleSelectionScene;
-        this.article = article;
-        generateScene();
+    public ArticleDisplayView(Controller controller) {
+        super(controller);
     }
 
+    @Override
     void generateScene() {
         Button backToDomainSelectionButton = new Button("Wróć do wyboru domeny");
-        backToDomainSelectionButton.setOnAction(e -> stage.setScene(domainSelectionScene.getScene()));
+        backToDomainSelectionButton.setOnAction(e ->
+                ((ArticleDisplayController) controller).handleBackToDomainSelectionButtonAction()
+        );
 
         Button backButton = new Button("Wróć do wyboru artykułu");
-        backButton.setOnAction(e -> stage.setScene(articleSelectionScene.getScene()));
+        backButton.setOnAction(e ->
+                ((ArticleDisplayController) controller).handleBackButtonAction()
+        );
 
-        Label articleTitle = new Label(article.getTitle());
+        Label articleTitle = new Label(((ArticleDisplayController) controller).getArticle().getTitle());
         articleTitle.setWrapText(true);
 
-        Label articleDate = new Label(article.getDate().toString());
+        Label articleDate = new Label(((ArticleDisplayController) controller).getArticle().getDate().toString());
 
         Label articleAuthor;
-        if (article.getAuthor() != null)
-            articleAuthor = new Label(article.getAuthor());
+        if (((ArticleDisplayController) controller).getArticle().getAuthor() != null)
+            articleAuthor = new Label(((ArticleDisplayController) controller).getArticle().getAuthor());
         else
             articleAuthor = new Label("brak podanego autora");
 
-        Label articleContent = new Label(article.getContent());
+        Label articleContent = new Label(((ArticleDisplayController) controller).getArticle().getContent());
         articleContent.setWrapText(true);
         articleContent.setPrefWidth(1200);
 
