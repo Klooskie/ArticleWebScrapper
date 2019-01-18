@@ -5,16 +5,12 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import pl.edu.agh.to2.gui.controller.Controller;
 import pl.edu.agh.to2.gui.controller.DomainSelectionController;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 
 
 public class DomainSelectionView extends JFXView {
@@ -26,21 +22,9 @@ public class DomainSelectionView extends JFXView {
     @Override
     void generateScene() {
 
-        Label sceneTitle = new Label("ShellWebScrapper");
+        Label sceneTitle = new Label("WebScrapper");
         sceneTitle.setFont(new Font("Arial", 30));
         sceneTitle.setTextFill(Color.web("#0076a3"));
-
-        Image image = null;
-        try {
-            image = new Image(new FileInputStream("pic1.jpg"));
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-        ImageView imageView = new ImageView(image);
-
-        Label sceneSubTitle = new Label("najlepszy scrapper");
-        sceneSubTitle.setFont(new Font("Arial", 25));
-        sceneSubTitle.setTextFill(Color.web("#0076a3"));
 
         Label chooseLabel = new Label("Wybierz portal:");
 
@@ -53,14 +37,14 @@ public class DomainSelectionView extends JFXView {
         gazetaButton.setOnAction(e -> {
             ((DomainSelectionController) controller).handleGazetaButtonAction();
         });
-        //TODO
+        //TODO enable button after implementing its logic
         gazetaButton.setDisable(true);
 
         Button onetButton = new Button("Onet");
         onetButton.setOnAction(e -> {
             ((DomainSelectionController) controller).handleOnetButtonAction();
         });
-        //TODO
+        //TODO enable button after implementing its logic
         onetButton.setDisable(true);
 
         Label searchLabel = new Label("Szukaj artykułów:");
@@ -76,7 +60,7 @@ public class DomainSelectionView extends JFXView {
         VBox domainSelectionLayout = new VBox();
         domainSelectionLayout.setAlignment(Pos.CENTER);
         domainSelectionLayout.setSpacing(20);
-        domainSelectionLayout.getChildren().addAll(sceneTitle, imageView, sceneSubTitle, chooseLabel, papButton, gazetaButton, onetButton, searchLabel, searchBar);
+        domainSelectionLayout.getChildren().addAll(sceneTitle, chooseLabel, papButton, gazetaButton, onetButton, searchLabel, searchBar);
 
         scene = new Scene(domainSelectionLayout, 1280, 720);
     }
