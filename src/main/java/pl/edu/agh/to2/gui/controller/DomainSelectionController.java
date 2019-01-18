@@ -1,8 +1,11 @@
 package pl.edu.agh.to2.gui.controller;
 
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import pl.edu.agh.to2.gui.view.ArticleSearchView;
 import pl.edu.agh.to2.gui.view.ArticleSelectionView;
 import pl.edu.agh.to2.persistence.Domain;
+
 
 public class DomainSelectionController extends Controller {
 
@@ -18,7 +21,7 @@ public class DomainSelectionController extends Controller {
     }
 
     public void handlePapButtonAction() {
-        if(papArticleSelectionController == null) {
+        if (papArticleSelectionController == null) {
             Domain papDomain = new Domain("https://www.pap.pl");
             papArticleSelectionController = new ArticleSelectionController(stage, this, papDomain);
             ArticleSelectionView articleSelectionView = new ArticleSelectionView(papArticleSelectionController);
@@ -28,7 +31,7 @@ public class DomainSelectionController extends Controller {
     }
 
     public void handleGazetaButtonAction() {
-        if(gazetaArticleSelectionController == null) {
+        if (gazetaArticleSelectionController == null) {
             Domain gazetaDomain = new Domain("Gazeta");
             gazetaArticleSelectionController = new ArticleSelectionController(stage, this, gazetaDomain);
             ArticleSelectionView articleSelectionView = new ArticleSelectionView(gazetaArticleSelectionController);
@@ -45,5 +48,15 @@ public class DomainSelectionController extends Controller {
             onetArticleSelectionController.setView(articleSelectionView);
         }
         stage.setScene(onetArticleSelectionController.getView().getScene());
+    }
+
+    public void handleEnterKeyReleaseInSearchBar(TextField searchBar) {
+        String searchedPhrase = searchBar.getText();
+        System.out.println("search request for \"" + searchedPhrase + "\"");
+
+        ArticleSearchController articleSearchController = new ArticleSearchController(stage, this, searchedPhrase);
+        ArticleSearchView articleSearchView = new ArticleSearchView(articleSearchController);
+        articleSearchController.setView(articleSearchView);
+        stage.setScene(articleSearchView.getScene());
     }
 }

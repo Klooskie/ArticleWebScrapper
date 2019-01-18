@@ -6,13 +6,13 @@ import pl.edu.agh.to2.gui.model.ArticleWrapper;
 public class ArticleDisplayController extends Controller {
 
     private DomainSelectionController domainSelectionController;
-    private ArticleSelectionController articleSelectionController;
+    private Controller articleListController;
     private ArticleWrapper article;
 
-    public ArticleDisplayController(Stage stage, DomainSelectionController domainSelectionController, ArticleSelectionController articleSelectionController, ArticleWrapper article) {
+    public ArticleDisplayController(Stage stage, DomainSelectionController domainSelectionController, Controller articleListController, ArticleWrapper article) {
         super(stage);
         this.domainSelectionController = domainSelectionController;
-        this.articleSelectionController = articleSelectionController;
+        this.articleListController = articleListController;
         this.article = article;
     }
 
@@ -20,8 +20,8 @@ public class ArticleDisplayController extends Controller {
         stage.setScene(domainSelectionController.getView().getScene());
     }
 
-    public void handleBackButtonAction() {
-        stage.setScene(articleSelectionController.getView().getScene());
+    public void handleBackToArticleListButtonAction() {
+        stage.setScene(articleListController.getView().getScene());
     }
 
     public ArticleWrapper getArticle() {

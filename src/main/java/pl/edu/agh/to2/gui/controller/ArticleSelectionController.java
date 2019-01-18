@@ -89,7 +89,7 @@ public class ArticleSelectionController extends Controller {
         return row;
     }
 
-    public void handleBackButtonAction() {
+    public void handleBackToDomainSelectionButtonAction() {
         stage.setScene(domainSelectionController.getView().getScene());
     }
 

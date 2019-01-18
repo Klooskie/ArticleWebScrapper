@@ -28,7 +28,7 @@ public class ArticleDisplayView extends JFXView {
 
         Button backButton = new Button("Wróć do wyboru artykułu");
         backButton.setOnAction(e ->
-                ((ArticleDisplayController) controller).handleBackButtonAction()
+                ((ArticleDisplayController) controller).handleBackToArticleListButtonAction()
         );
 
         Label articleTitle = new Label(((ArticleDisplayController) controller).getArticle().getTitle());

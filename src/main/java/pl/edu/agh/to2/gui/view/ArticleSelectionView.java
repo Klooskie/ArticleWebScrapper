@@ -56,7 +56,7 @@ public class ArticleSelectionView extends JFXView {
 
         Button backButton = new Button("Wróć do wyboru domeny");
         backButton.setOnAction(e ->
-                ((ArticleSelectionController) controller).handleBackButtonAction()
+                ((ArticleSelectionController) controller).handleBackToDomainSelectionButtonAction()
         );
 
         Button refreshButton = new Button("Odśwież listę artykułów");

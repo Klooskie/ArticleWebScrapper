@@ -15,7 +15,7 @@ public class ArticleWrapper {
     private SimpleStringProperty author;
     private SimpleStringProperty source;
     private SimpleStringProperty url;
-    private SimpleObjectProperty<List<String>> tags;
+    private SimpleStringProperty domainUrl;
 
 
     public ArticleWrapper(Article article) {
@@ -25,6 +25,7 @@ public class ArticleWrapper {
         this.author = new SimpleStringProperty(article.getAuthor());
         this.source = new SimpleStringProperty(article.getSource());
         this.url = new SimpleStringProperty(article.getUrl());
+        this.domainUrl = new SimpleStringProperty(article.getDomain().getUrl());
     }
 
     public String getTitle() {
@@ -51,6 +52,10 @@ public class ArticleWrapper {
         return url.get();
     }
 
+    public String getDomainUrl() {
+        return domainUrl.get();
+    }
+
     public void setTitle(String title) {
         this.title.set(title);
     }
@@ -73,6 +78,10 @@ public class ArticleWrapper {
 
     public void setUrl(String url) {
         this.url.set(url);
+    }
+
+    public void setDomainUrl(String domainUrl) {
+        this.domainUrl.set(domainUrl);
     }
 
 
