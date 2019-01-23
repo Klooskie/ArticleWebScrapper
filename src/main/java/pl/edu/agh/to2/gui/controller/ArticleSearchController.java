@@ -33,8 +33,8 @@ public class ArticleSearchController extends Controller {
         listOfArticles = FXCollections.observableArrayList();
 
         //TODO
-        List<ArticleWrapper> articleWrappers = ArticleWrapper.wrapArticles(DataBase.getArticles(new Domain("https://www.pap.pl")));
-//        List<ArticleWrapper> articleWrappers = ArticleWrapper.wrapArticles(DataBase.searchForArticles(searchedPhrase));
+//        List<ArticleWrapper> articleWrappers = ArticleWrapper.wrapArticles(DataBase.getArticles(new Domain("https://www.pap.pl")));
+        List<ArticleWrapper> articleWrappers = ArticleWrapper.wrapArticles(DataBase.searchForArticles(searchedPhrase));
         listOfArticles.addAll(articleWrappers);
     }
 

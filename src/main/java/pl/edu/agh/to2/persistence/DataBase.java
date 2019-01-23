@@ -51,10 +51,30 @@ public class DataBase {
         txn.begin();
         String SQLquery = "SELECT a FROM Article a JOIN a.domain d WHERE d.url like :d_url";
         Query query = entityManager.createQuery(SQLquery, Article.class).setParameter("d_url", domain.getUrl());
-//        String SQLquery = "SELECT a FROM Article a ";
-//        Query query = entityManager.createQuery(SQLquery, Article.class);
         List list = query.getResultList();
         txn.commit();
         return list;
+    }
+
+    public static List<Article> searchForArticles(String searchedPhrase) {
+        EntityTransaction txn = entityManager.getTransaction();
+        txn.begin();
+
+        String SQLquery = "SELECT a FROM Article a";
+        Query query = entityManager.createQuery(SQLquery, Article.class);
+        List<Article> list = query.getResultList();
+
+        List<Article> filteredList = new ArrayList<>();
+
+
+        for(Article article : list) {
+            if (article.getContent().toLowerCase().contains(searchedPhrase.toLowerCase())) {
+                filteredList.add(article);
+            }
+        }
+
+
+        txn.commit();
+        return filteredList;
     }
 }
