@@ -8,19 +8,20 @@ public class DataBase {
     private static EntityManagerFactory factory;
     private static EntityManager entityManager;
 
-    static{
+    static {
         factory = Persistence.createEntityManagerFactory("default");
         entityManager = factory.createEntityManager();
     }
 
-    private DataBase() { }
+    private DataBase() {
+    }
 
-    public static void close(){
+    public static void close() {
         entityManager.close();
         factory.close();
     }
 
-    public static boolean save(Domain domain){
+    public static boolean save(Domain domain) {
         try {
             EntityTransaction txn = entityManager.getTransaction();
             txn.begin();
@@ -67,8 +68,9 @@ public class DataBase {
         List<Article> filteredList = new ArrayList<>();
 
 
-        for(Article article : list) {
-            if (article.getContent().toLowerCase().contains(searchedPhrase.toLowerCase())) {
+        for (Article article : list) {
+            if (article.getContent().toLowerCase().contains(searchedPhrase.toLowerCase()) ||
+                    article.getTitle().toLowerCase().contains(searchedPhrase.toLowerCase())) {
                 filteredList.add(article);
             }
         }
