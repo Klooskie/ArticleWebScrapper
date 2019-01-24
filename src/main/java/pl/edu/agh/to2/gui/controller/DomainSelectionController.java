@@ -42,7 +42,7 @@ public class DomainSelectionController extends Controller {
 
     public void handleOnetButtonAction() {
         if (onetArticleSelectionController == null) {
-            Domain onetDomain = new Domain("Onet");
+            Domain onetDomain = new Domain("https://www.onet.pl");
             onetArticleSelectionController = new ArticleSelectionController(stage, this, onetDomain);
             ArticleSelectionView articleSelectionView = new ArticleSelectionView(onetArticleSelectionController);
             onetArticleSelectionController.setView(articleSelectionView);
