@@ -52,7 +52,6 @@ public class Crawler {
     private Scrapper makeScrapper(Domain domain){
 
         Scrapper scrapper;
-
         switch (domain.getUrl()) {
             case "https://www.pap.pl":
                 scrapper = new PAPScrapper();
@@ -60,10 +59,12 @@ public class Crawler {
             case "http://www.gazeta.pl":
                 scrapper = new GazetaScrapper();
                 break;
+            case "https://www.onet.pl":
+                scrapper = new OnetScrapper();
+                break;
             default:
                 return null;
         }
-
 
         return scrapper;
     }
