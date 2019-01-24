@@ -41,7 +41,7 @@ public class Crawler {
         }
 
         for (String newUrl : urls) {
-            if(newUrl.equals("https://www.pap.pl/list-of-articles/"))
+            if (newUrl.equals("https://www.pap.pl/list-of-articles/"))
                 continue;
             crawl(newUrl, depth + 1);
         }
@@ -49,7 +49,7 @@ public class Crawler {
     }
 
 
-    private Scrapper makeScrapper(Domain domain){
+    private Scrapper makeScrapper(Domain domain) {
 
         Scrapper scrapper;
         switch (domain.getUrl()) {
@@ -80,6 +80,7 @@ public class Crawler {
             connection.setRequestMethod("GET");
 
             InputStream stream = connection.getInputStream();
+
             BufferedReader in = new BufferedReader(new InputStreamReader(stream));
             String inputLine;
 
@@ -92,13 +93,19 @@ public class Crawler {
             in.close();
 
             connection.disconnect();
-        } catch (FileNotFoundException e){
-            return "";
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
         }
+
+        catch (Exception e) {
+            return "";
+        }
+
+//        catch (FileNotFoundException e) {
+//            return "";
+//        } catch (MalformedURLException e) {
+//            e.printStackTrace();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
 
 
         return content.toString();
