@@ -5,9 +5,7 @@ import pl.edu.agh.to2.persistence.DataBase;
 import pl.edu.agh.to2.persistence.Domain;
 
 import javax.xml.crypto.Data;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -59,28 +57,29 @@ public class Crawler {
             case "https://www.pap.pl":
                 scrapper = new PAPScrapper();
                 break;
-
+            case "http://www.gazeta.pl":
+                scrapper = new GazetaScrapper();
+                break;
             default:
                 return null;
         }
+
 
         return scrapper;
     }
 
 
-    private String downloadHtml(String inputUrl) {
+    public String downloadHtml(String inputUrl) {
 
         StringBuffer content = null;
 
         try {
             URL url = new URL(inputUrl);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-
             connection.setRequestMethod("GET");
 
-
-            BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-
+            InputStream stream = connection.getInputStream();
+            BufferedReader in = new BufferedReader(new InputStreamReader(stream));
             String inputLine;
 
             content = new StringBuffer();
@@ -92,7 +91,8 @@ public class Crawler {
             in.close();
 
             connection.disconnect();
-
+        } catch (FileNotFoundException e){
+            return "";
         } catch (MalformedURLException e) {
             e.printStackTrace();
         } catch (IOException e) {
