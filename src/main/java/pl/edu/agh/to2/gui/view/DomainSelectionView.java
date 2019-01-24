@@ -37,8 +37,8 @@ public class DomainSelectionView extends JFXView {
         gazetaButton.setOnAction(e -> {
             ((DomainSelectionController) controller).handleGazetaButtonAction();
         });
-        //TODO enable button after implementing its logic
-        gazetaButton.setDisable(true);
+//        //TODO enable button after implementing its logic
+//        gazetaButton.setDisable(true);
 
         Button onetButton = new Button("Onet");
         onetButton.setOnAction(e -> {

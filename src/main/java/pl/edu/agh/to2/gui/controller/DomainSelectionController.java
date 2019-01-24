@@ -32,7 +32,7 @@ public class DomainSelectionController extends Controller {
 
     public void handleGazetaButtonAction() {
         if (gazetaArticleSelectionController == null) {
-            Domain gazetaDomain = new Domain("Gazeta");
+            Domain gazetaDomain = new Domain("http://www.gazeta.pl");
             gazetaArticleSelectionController = new ArticleSelectionController(stage, this, gazetaDomain);
             ArticleSelectionView articleSelectionView = new ArticleSelectionView(gazetaArticleSelectionController);
             gazetaArticleSelectionController.setView(articleSelectionView);
