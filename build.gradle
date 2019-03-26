@@ -3,13 +3,12 @@ apply plugin: 'application'
 
 
 description = """
-Example project for a TO2 course.
-
-Project name: ${project.name}
+Project for a TO2 course.
 
 Authors:
-Jan Kapala <jkowalski@student.agh.edu.pl>
-Maria Nowak <mnowak@student.agh.edu.pl> """
+Jan Kapala 
+Jakub Konieczny
+Patryk Wójtowicz """
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
